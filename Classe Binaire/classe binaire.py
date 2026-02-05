@@ -140,15 +140,13 @@ def ajnoeud(a,c,comp=1, arb = False):
         return ajnoeud(a,c,comp,arb)
 
     if arb == True:
+
         if c[comp] == "0":
             a.ins_gauche(c[0:comp+1])
             return ajnoeud(a.gauche,c,comp+1,arb)
         else:
             a.ins_droit(c[0:comp+1])
             return ajnoeud(a.droit,c,comp+1,arb)
-
-
-
 
 #exemple 1
 """
@@ -205,6 +203,7 @@ a.gauche.droit.droit.gauche.ins_droit(101101)
 """
 
 #arbre Binaire numéroté 2 exemple 2b
+"""
 a=arbre("1")
 a.ins_gauche("10")
 a.ins_droit("11")
@@ -213,6 +212,7 @@ a.droit.droit.ins_droit("1111")
 a.gauche.ins_gauche("100")
 a.gauche.gauche.ins_gauche("1000")
 a.gauche.gauche.gauche.ins_droit("10001")
+"""
 
 """
 print(taille(a))
@@ -224,7 +224,61 @@ print(additif(a))
 print(additif2(a))
 print(binaireit(50))
 print(binairerec(50))
-
+print(ajnoeud(a,"11111"))
 """
 
-print(ajnoeud(a,"11111"))
+#Feuille 2
+
+#ex 2, 2 b
+
+def evaluer(a):
+    if a.gauche == None and a.droit == None :
+        return a.noeud
+    if a.noeud == "+" :
+        return evaluer(a.gauche) + evaluer(a.droit)
+    if a.noeud == "-" :
+        return evaluer(a.gauche) - evaluer(a.droit)
+    if a.noeud == "*" :
+        return evaluer(a.gauche) * evaluer(a.droit)
+    if a.noeud == "/" :
+        return evaluer(a.gauche) / evaluer(a.droit)
+
+
+#ex 2 ,1 a
+"""
+a = arbre("*")
+a.ins_gauche("+")
+a.gauche.ins_gauche(2)
+a.gauche.ins_droit(5)
+a.ins_droit("-")
+a.droit.ins_gauche(3)
+a.droit.ins_gauche(4)
+"""
+#ex 1 b
+"""
+a=arbre("*")
+a.ins_gauche("+")
+a.gauche.ins_gauche(3)
+a.gauche.ins_droit(1)
+a.ins_droit("/")
+a.droit.ins_gauche("+")
+a.droit.gauche.ins_gauche(4)
+a.droit.gauche.ins_droit(2)
+a.droit.ins.droit(3)
+"""
+
+#ex 1 c
+"""
+a=arbre("/")
+a.ins_gauche("*")
+a.gauche.ins_gauche("+")
+a.gauche.gauche.ins_gauche(1)
+a.gauche.gauche.ins_droit(2)
+a.gauche.ins_droit(4)
+a.ins_droit("-")
+a.droit.ins.gauche("*")
+a.droit.gauche.ins_gauche(2)
+a.droit.gauche.ins_droit(3)
+a.droit.ins_droit(5)
+"""
+evaluer(a)
