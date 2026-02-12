@@ -46,6 +46,22 @@ def minimum(a):
             else:
                 return min(a.noeud,minimum(a.gauche),minimum(a.droit))
 
+def maximum(a):
+    n=a.noeud
+    if a.gauche == None and a.droit ==None:
+        return a.noeud
+    else:
+        if a.noeud > n :
+            n = a.noeud
+        else:
+            if a.gauche == None:
+                return min(a.noeud,minimum(a.droit))
+            if a.droit == None:
+                return min(a.noeud,minimum(a.gauche))
+            else:
+                return min(a.noeud,minimum(a.gauche),minimum(a.droit))
+
+
 def profondeur(a,s):
     if a.noeud == s:
         return 1
@@ -280,5 +296,97 @@ a.droit.ins.gauche("*")
 a.droit.gauche.ins_gauche(2)
 a.droit.gauche.ins_droit(3)
 a.droit.ins_droit(5)
+
 """
-evaluer(a)
+"""evaluer(a)"""
+
+#ABR FEUILLE 1
+
+def est_abr(a):
+    if a == None:
+        return True
+    if a.gauche != None and a.noeud < maximum(a.gauche):
+        return False
+    if a.droit != None and a.noeud > maximum(a.droit):
+        return False
+    return est_abr(a.gauche) and est_abr(a.droit)
+
+def verifieABR(a):
+    return est_abr(a) == True
+
+def minABR(a):
+    if a == None :
+        return None
+    if a.gauche == None and a.droit == None:
+        return a.noeud
+    else:
+        minABR(a.gauche)
+
+def minABR(a):
+    if a == None :
+        return None
+    if a.gauche == None and a.droit == None:
+        return a.noeud
+    else:
+        minABR(a.droit)
+#ABR
+"""
+a=arbre(6)
+a.ins_droit(7)
+a.ins_gauche(1)
+a.gauche.ins_droit(5)
+a.droit.ins_droit(9)
+a.gauche.droit.ins_gauche(4)
+a.gauche.droit.gauche.ins_gauche(3)
+a.gauche.droit.gauche.ins_gauche(2)
+a.droit.droit.ins_gauche(8)
+
+"""
+a=arbre(15)
+a.ins_gauche(4)
+a.gauche.ins_droit(6)
+a.gauche.droit.ins_droit(12)
+a.ins_droit(18)
+a.droit.ins_droit(23)
+a.gauche.droit.droit.ins_droit(14)
+a.gauche.ins_gauche(2)
+a.droit.droit.ins_gauche(20)
+a.gauche.droit.droit.ins_gauche(11)
+a.droit.ins_gauche(16)
+a.gauche.droit.droit.gauche.ins_gauche(7)
+
+#print(est_abr(a))
+
+def ajt_abr(x,a=None):
+    if a == None:
+        a=arbre(x)
+        return a
+    else:
+        if a.noeud > x:
+            if a.gauche == None:
+                a.ins_gauche(x)
+                return a
+            else:
+                return ajt_abr(x,a.gauche)
+        else:
+            if a.droit == None:
+                a.ins_droit(x)
+                return a
+
+def contruction(a,l):
+    a=arbre()
+    for i in l:
+        a = ajt_abr(i,a)
+    return arbre
+
+def tri_arbre(a):
+    if a == None:
+        return []
+    else:
+        if a.gauche == None and a.droit == None:
+            return [a.noeud]
+        else:
+            return tri_arbre(a.gauche) + [a.noeud] + tri_arbre(a.droit)
+
+print(tri_arbre(a))
+
