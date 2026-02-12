@@ -388,5 +388,24 @@ def tri_arbre(a):
         else:
             return tri_arbre(a.gauche) + [a.noeud] + tri_arbre(a.droit)
 
-print(tri_arbre(a))
+#print(tri_arbre(a))
+
+#Feuille 2
+a1 = arbre(1)
+a1.ins_gauche(0)
+a1.ins_droit(2)
+a1.droit.ins_droit(3)
+a1.droit.droit.ins_droit(4)
+a1.droit.droit.droit.ins_droit(5)
+a1.droit.droit.droit.droit(6)
+
+a2 = arbre(3)
+a2.ins_gauche(2)
+a2.gauche.ins_gauche(1)
+a2.gauche.gauche.ins_gauche(0)
+a2.ins_droit(4)
+
+arbre_no1 =
+arbre_no2 =
+arbre_no3 =
 
