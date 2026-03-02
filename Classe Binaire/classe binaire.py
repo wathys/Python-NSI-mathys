@@ -9,12 +9,63 @@ class arbre:
     def ins_droit(self,v):
         if self.droit == None:
             self.droit = arbre(v)
+    def hauteur(self):
+        if self.est_vide():
+            return -1
+        else:
+            return 1+max(self.sag().hauteur(), self.sad().hauteur())
+    def est_partiellement_equilibre(self):
+        if self.est_vide():
+            return True
+        return abs( self.sag().hauteur() - self.sad().hauteur()) <= 1
+class ABR:
+    # arbre binaire de recherche initialement vide
+    def __init__(self):
+        self.racine = None # arbre vide
+        # Remarque : si l’arbre n’est pas vide, racine est
+        # une instance de la classe Noeud
+    def est_vide(self):
+        return self.racine == None
+    def insere(self, nouveau_noeud):
+        if self.est_vide():
+            self.racine = nouveau_noeud
+        elif self.racine.indice < nouveau_noeud.indice:
+            self.racine.gauche.insere(nouveau_noeud)
+        else:
+            self.racine.droite.insere(nouveau_noeud)
+    def est_present(self, indice_recherche):
+        """renvoie True si l’indice de priorité indice_recherche (int) passé en paramètre
+        est déjà l’indice d’un nœud de l’arbre, False sinon"""
+        if self.est_vide():
+            return False
+        else:
+            if self.racine.indice == indice_recherche :
+                return True
+            else:
+                if self.racine.indice < indice_recherche:
+                    return self.racine.droit.est_present(indice_recherche)
+                else:
+                    return self.racine.gauche.est_present(indice_recherche)
+    def tache_prioritaire(self):
+        """renvoie la tache du noeud situé le plus
+à gauche de l’ABR supposé non vide"""
+        if self.racine.gauche.est_vide():
+            return self.racine
+        else:
+            return self.racine.gauche.tache_prioritaire()
+
+class Noeud:
+    def __init__(self, tache, indice):
+        self.tache = tache # ce que doit accomplir le robot
+        self.indice = indice # indice de priorité (int)
+        self.gauche = ABR() # sous-arbre gauche vide (ABR)
+        self.droite = ABR() # sous-arbre droit vide (ABR)
 
 def taille(a):
-        if a == None :
-            return 0
-        else:
-            return 1 + taille(a.gauche) + taille(a.droit)
+    if a == None :
+        return 0
+    else:
+        return 1 + taille(a.gauche) + taille(a.droit)
 
 def hauteur(a):
     if a == None:
@@ -390,7 +441,7 @@ def tri_arbre(a):
 
 #print(tri_arbre(a))
 
-#Feuille 2
+#Feuille 2 type bac
 a1 = arbre(1)
 a1.ins_gauche(0)
 a1.ins_droit(2)
@@ -405,7 +456,66 @@ a2.gauche.ins_gauche(1)
 a2.gauche.gauche.ins_gauche(0)
 a2.ins_droit(4)
 
-arbre_no1 =
-arbre_no2 =
-arbre_no3 =
+arbre_no1 = arbre()
+arbre_no2 = arbre()
+arbre_no3 = arbre()
+for cle_a_inserer in [1,0,2,3,4,5,6]:
+    arbre_no1.inserer(cle_a_inserer)
+for cle_a_inserer in [0,1,2,6,5,4,3]:
+    arbre_no2.inserer(cle_a_inserer)
+for cle_a_inserer in [0,1,2,3,4,5,6]:
+    arbre_no3.inserer(cle_a_inserer)
+"""
+def hauteur(self):
+    if self.est_vide():
+        return -1
+    else:
+        return 1+max(self.sag().hauteur(), self.sad().hauteur())
+"""
+"""
+def est_present(self,cle_a_rechercher):
+    if self.est_vide():
+        return False
+    elif cle_a_rechercher == self.cle():
+        return True
+    elif cle_a_rechercher < self.cle():
+        return self.sad.est_present(cle_a_rechercher)
+    else:
+        return self.sag.est_present(cle_a_rechercher)
+"""
+"""
+def est_partiellement_equilibre(self):
+    if self.est_vide():
+        return True
+    return abs( self.sag().hauteur() - self.sad().hauteur()) <= 1
+"""
+#Feuille 3
+#ex 1.1 File
+#ex 1.2a Taille b racine c feuille
+
+#ex 1.3 a tache indice droite gauche
+
+# b elle se termine car sur l'abre est vide elle se termine automatiquement et elle s'apelle elle meme
+
+# C <
+
+#5a 3 5 6 7 8 10 11 13 16 14
+
+#B lors de la recherche on prend la premiere valeur
+
+"""
+a) reçu une tâche d’indice de priorité 14 à accomplir
+b) reçu une tâche d’indice de priorité 11 à accomplir
+c) reçu une tâche d’indice de priorité 8 à accomplir
+d) accompli sa tâche prioritaire
+e) reçu une tâche d’indice de priorité 12 à accomplir
+f) accompli sa tâche prioritaire
+g) accompli sa tâche prioritaire
+h) reçu une tâche d’indice de priorité 15 à accomplir
+i) reçu une tâche d’indice de priorité 19 à accomplir
+j) accompli sa tâche prioritaire
+"""
+
+
+
 
