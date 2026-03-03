@@ -50,7 +50,7 @@ class ABR:
         """renvoie la tache du noeud situé le plus
 à gauche de l’ABR supposé non vide"""
         if self.racine.gauche.est_vide():
-            return self.racine
+            return self.racine.tache
         else:
             return self.racine.gauche.tache_prioritaire()
 
@@ -495,9 +495,9 @@ def est_partiellement_equilibre(self):
 
 #ex 1.3 a tache indice droite gauche
 
-# b elle se termine car sur l'abre est vide elle se termine automatiquement et elle s'apelle elle meme
+# b elle se termine car si l'abre a force de dessendre elle aura pas de noeud et elle sera vide elle se termine automatiquement et elle s'apelle elle meme
 
-# C <
+# C >
 
 #5a 3 5 6 7 8 10 11 13 16 14
 
@@ -515,7 +515,4 @@ h) reçu une tâche d’indice de priorité 15 à accomplir
 i) reçu une tâche d’indice de priorité 19 à accomplir
 j) accompli sa tâche prioritaire
 """
-
-
-
 
