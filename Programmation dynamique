@@ -74,5 +74,20 @@ def fib_list(n):
 #3 Rendu de monnage
 #   2.1 Présentation du PB
 
+def rendu_monnaie(n):
+    l=[]
+    m=[100,50,20,10,5,2,1]
+    for i in m :
+        if n/i > 0:
+            a = n//i
+            n/i
+            if i >= 2:
+                l.append((a,"billet de",i))
+            else:
+                l.append((a,"piece de",i))
+    return l
+
+print(rendu_monnaie(98))
+
 
 
