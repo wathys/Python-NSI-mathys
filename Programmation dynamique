@@ -1,0 +1,78 @@
+#programmation dynamique
+#1 intro
+#   1.1 Exemple : suite de fibonnaci
+
+def fib_it(n):
+    f3 = 0
+    for i in range(n+1):
+        if i == 0:
+            f1 = 0
+            f2 = 1
+            f3 = f1 + f2
+        else:
+            f1 = f2
+            f2 = f3
+            f3 = f1 + f2
+    return f3
+
+#print(fib_it(6))
+
+def fib_rec(n):
+    """
+    bien que la fonction donne le bon résultat le programme est très lent car il effectue énormement de calcul, et pass une grand parti de son temps a recaculer des terme qui la recalculer avant.
+    """
+    if n <=1:
+        return n
+    else:
+        return fib_rec(n-1) + fib_rec(n-2)
+
+#print(fib_rec(6))
+
+#   1.2 Diviser pour régner
+
+def fib2(n):
+    """
+    on reduit fortement le nb d'appel recursive, malheureusement on calcul toujours plusieurs fois des meme valeurs
+    """
+    if n <= 1:
+        return n
+    else:
+        if n % 2 == 0:
+            return fib2(n//2) ** 2 + 2 * fib2(n//2) * fib2(n//2-1)
+        else:
+            return fib2(n//2) ** 2 + fib2(n//2 + 1) ** 2
+
+#print(fib2(55))
+
+#2 Mémoïsation
+
+#   2.1 definition principe de base.
+#       La programmation dynamique est une technique de programmation afin d'améliorer l'éfficacité d'un algorithme en évitant les calcul redondant, principe de la mémoïsation (On utilise une liste ou un dictionnaire)
+
+#   2.2 Un dictionnaire pour mémoire
+
+def fib_dico(n,d={0:0,1:1}):
+    if n in d :
+        return d[n]
+    else:
+        a = fib_dico(n-1,d) + fib_dico(n-2,d)
+        d[n] = a
+        return a
+
+#print(fib_dico(6))
+
+#   2.3 Utilisation d'une liste
+
+def fib_list(n):
+    l=[0,1]
+    for i in range(n-1):
+        l.append(l[-2] + l[-1])
+    return l , l[-1]
+
+#print(fib_list(6))
+
+#3 Rendu de monnage
+#   2.1 Présentation du PB
+
+
+
