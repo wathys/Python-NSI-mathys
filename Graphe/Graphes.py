@@ -10,6 +10,7 @@
         #Ordre       On appelle ordre d'un graphe le nombre de sommet du graphes
         #Taille       On appelle taille d'un graphe le nombre d'arrête du graphes
         #Degrès     On appelle degrès d'un sommet, le nombre d'arrête incidente a ce sommet
+        #Remarque:        La somme des degrès represente le double de la taille
 
         #Remarque : Une arrête peut relié un sommet a lui même, on parle alors de boucle. Dans ce cas, l'arrête compte double dans le calcul du degrès
 
@@ -54,7 +55,88 @@ Degrès:
 
         #Dégrés   (refaire la def)  On défini le degrès sortant, respectivement le degrès entrant, d'un sommet par le nombre de sommet par adjacent a ce sommet,respectivement le nombre de sommet dont notre sommet est adjacent
 
+#2 Matrice d'adjacence d'un graph
+#   2.1 Introduction
+        #On considère un graphe (orienté ou non) et on va noter ses sommets par des entier de 0 et 1, ou n'est pas l'ordre du graphe. On peut alors representr le graphe par une matrice de taille n*n, c'est à dire un tableau à n lignes et n colone, où l'élement à la i éme ligne et j ème colone sont 1 s'il existe une arrête reliant le sommet i vers le sommet j, et 0 sinon. On appelle cette matrice la "matrice d'ajacence"
+        #exemple :
 
+"""
+   1
+ /   \
+0     2
+|\   /|
+|  3  |
+4-----5
+
+
+  0 1 2 3 4 5
+0 0 1 0 1 1 0
+1 1 0 1 0 0 0
+2 0 1 0 1 0 1
+3 1 0 1 0 0 0
+4 1 0 0 0 0 1
+5 0 0 1 0 1 0
+"""
+
+"""
+0--->1--->3
+> \  |    |
+|  > >    |
+|    2    <
+4<--------5
+
+0 1 1 0 0 0
+0 0 1 1 0 0
+0 0 0 0 0 0
+0 0 0 0 0 1
+1 0 0 0 0 0
+0 0 0 0 1 0
+"""
+        #Remarque la contruction de la matruce d'ajacence dépend du choix de la numérotation des sommet donc un graphe possède plusieur matrice d'ajacences, mais ces matrices sont toutes équivalente
+#   2.2 Representaion des matrice en python
+        #Pour representer une matruce en python on va utiliser une liste de liste, où chaque liste va representer une ligne de la matrice.
+
+        #Par exemple:
+"""
+1 2 4
+5 0 7
+6 2 3
+"""
+g = [
+    [1,2,4]
+    [5,0,7]
+    [6,2,3]
+        ]
+
+        #quelque commande a retenir:
+            #M[i] renvoie la i ème ligne de la matrice M
+            #M[i][j] renvoie la i ème ligne et la j ème colone de la matrice M
+
+#   2.3 Ordre d'un graphe
+    #L'ordre d'un graphe correspond au nombre de ligne dans la matrice d'adjacent, c'est à dire au nombre d'élément dans la liste M. On peut facilement récuperer l'ordre du graphe à l'aide de l'instruction : "len(M)"
+
+#   2.4 Taille d'un graphe
+#       2.4.1 Graphe orienté
+            #La taille d'un graphe orienté est égale à la somme des élément dans la matrice d'adjacence
+
+def taille_oriente(M):
+    t = 0
+    m = len(M)
+    for i in range(m):
+        for j in range(m):
+            t = t + m[i][j]
+    return t
+
+#   2.4.1 Graphe non orienté
+        #Dans le cas d'un graphe orienté, toutes les arrêtes son compter deux fois dans la matrice d'adjacences (sauf boucle). Afin de répondre à ce probleme on peut uniquement compter les élément qui sont en dessous de la diagonale.
+
+def taille_non_oriente(M):
+    t = 0
+    m = len(M)
+    for i in range(m):
+        for j in range(i+1):
+            t = t + m[i][j]
+    return t
 
 
 
