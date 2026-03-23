@@ -103,8 +103,8 @@ Degrès:
 6 2 3
 """
 g = [
-    [1,2,4]
-    [5,0,7]
+    [1,2,4],
+    [5,0,7],
     [6,2,3]
         ]
 
@@ -137,6 +137,38 @@ def taille_non_oriente(M):
         for j in range(i+1):
             t = t + m[i][j]
     return t
+
+#   2.5 Degré d'un sommet
+#       2.5.1 Graphe non orienté
+def degree_non_oriente(m,a):
+    n=0
+    for i in range(len(m[a])):
+        n= n + m[a][i]
+##        if m[a][a] == 1:
+##            n+=1
+    return n + m[a][a]
+
+#       2.5.2 Graphe oriente
+def degree_oriente(m,a):
+    e=0
+    s=0
+    for i in range(len(m[a])):
+        s = s + m[a][i]
+        e = e + m[i][a]
+    return e + s
+
+m = [[0,1,0,0,1,0],[1,0,1,0,0,1],[0,1,0,1,0,1],[0,0,1,1,1,1],[0,0,0,1,0,1],[0,1,1,0,1,0]]
+print(degree_oriente(m,2))
+
+#3 Dictionnaire d'adjacence d'un graphe
+#   3.1 Introduction
+        #une autre manière de coder un graphe est d'utiliser un dictionnaire, dans le quel chaque sommet sera une clé du dictionnaire et la valeurs associé a cette clé sera une liste represantant l'enssemble des sommet adjacent a cette clé.
+
+d = {"a" : ["b","c","d","f"],"b" : ["a","d"], "c" : ["a","d","e","f"], "e" : ["d","c","f"], "f" : ["a","c","e"]}
+
+d = {0 : [1,2], 1 : [3], 2 : [3,1], 3 : [5], 4 : [0],5 : [2,4]}
+
+
 
 
 
