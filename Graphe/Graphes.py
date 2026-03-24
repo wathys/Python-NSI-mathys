@@ -149,6 +149,7 @@ def degree_non_oriente(m,a):
     return n + m[a][a]
 
 #       2.5.2 Graphe oriente
+
 def degree_oriente(m,a):
     e=0
     s=0
@@ -164,11 +165,84 @@ print(degree_oriente(m,2))
 #   3.1 Introduction
         #une autre manière de coder un graphe est d'utiliser un dictionnaire, dans le quel chaque sommet sera une clé du dictionnaire et la valeurs associé a cette clé sera une liste represantant l'enssemble des sommet adjacent a cette clé.
 
-d = {"a" : ["b","c","d","f"],"b" : ["a","d"], "c" : ["a","d","e","f"], "e" : ["d","c","f"], "f" : ["a","c","e"]}
+d = {"a" : ["b","c","d","f"],"b" : ["a","d"], "c" : ["a","d","e","f"], "e" : ["d","c","f"], "f" : ["a","c","e"]} #non orient
 
-d = {0 : [1,2], 1 : [3], 2 : [3,1], 3 : [5], 4 : [0],5 : [2,4]}
+d = {0 : [1,2], 1 : [3], 2 : [3,1], 3 : [5], 4 : [0],5 : [2,4]} #oriente
 
 
+#   3.2 Soient g un graph et d son dictionnaire d'adjacencel'ordre d'un graphe correspond aux nombre de d'entrée dans le dictionnaire len(d)
 
+#   3.3.1 Graphe oriente
+        #soit g un graphe oriente et d sont dicitonnaire d'adjacence. La taille d'un graphe correspond au nombre d'élementqui figurent dans le champs des liste que contient le dictionnaire d'adajcence
+
+def taille(d):
+    t= 0
+    for i in d:
+        t += len(d[i])
+    return t
+
+#   3.3.1
+        #soit un graphe g et un dictionnaire d'adjacence d. Dans le cas, chaque arrête apparait deux fois dans le dictionnaire d'adjacence, à l'exeption des boucles. l'idée est donc de compter tout les éléments dans les différente liste, en comptant boucle puis divisier par deux
+
+def taille_nonoriente(d):
+    t=0
+    for i in d:
+        if i in d[i]:
+            t = t + len(d[i]) + 1
+        else:
+            t = t + len(d[i])
+        return t // 2
+
+#   3.4 degree d'un sommet
+#       3.4.1 Graphe non oriente
+            #soit g un graphe non oriente et d son dicitonnaire d'ajacence. Le degree d'un sommet correspond au nombre d'élélement dans ma lsite associé a ce sommet (il faudrait ajouter 1 dans le cas d'un boucle)
+
+def degree_non_oriente_dict(d,s):
+    if s in d[s]:
+        return len(d[s]) + 1
+    else:
+        return len(d[s])
+
+#       3.4.2 Graphe orienté
+            # soit g un graphe non oriente et d son dicitonnaire d'ajacence. Dans ce cas, pour calculer le degré d'un sommet, il va falloir calculer le degree entrant et sortant du sommet. Le degree sortant correspond à la longueur de la listee associé au sommet, et le degré entrant correspond au nonmbre de liste dans le quel figure le sommet.
+
+def degree_oriente_dict(d,s):
+    ds = len(d[s])
+    de = 0
+    for i in d:
+        if s in d[i]:
+            de = de + 1
+    return ds + de
+
+def oriente(m):
+        for i in range(len(m)):
+            for j in range(len(m)):
+                if m[i][j] == 1:
+                    if m[j][i] != 1:
+                        return False
+        return True
+
+m2 = [
+[0,1,1,0],[1,0,1,0],[1,1,0,1],[0,0,1,1]
+]
+
+#print(oriente(m2))
+
+#ex6
+#a
+d1 = {0 : [0,1,0,0,1], 1 : [1,0,1,0,0], 2 : [1,1,0,0,1], 3 : [0,1,0,1,0], 4 : [1,0,1,1,0]}
+d2 = {0 : [0,1,1,0,1,0], 1 : [1,0,0,0,1,0], 2 : [1,0,0,0,1,1], 3 : [0,0,0,1,0,1], 4 : [0,0,1,1,0,0], 5 : [0,1,0,0,0,0]}
+
+def matdic(m):
+    d={}
+    for i in range(len(m)):
+        l = []
+        for j in range(len(m)):
+            if m[i][j] == 1:
+                l.append(j)
+        d[i] = l
+    return d
+
+print(matdic(m2))
 
 
