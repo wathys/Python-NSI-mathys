@@ -167,7 +167,7 @@ print(degree_oriente(m,2))
 
 d = {"a" : ["b","c","d","f"],"b" : ["a","d"], "c" : ["a","d","e","f"], "e" : ["d","c","f"], "f" : ["a","c","e"]} #non orient
 
-d = {0 : [1,2], 1 : [3], 2 : [3,1], 3 : [5], 4 : [0],5 : [2,4]} #oriente
+d = {0 : [1,2], 1 : [3], 2 : [3,1], 3 : [5], 4 : [0], 5 : [2,4]} #oriente
 
 
 #   3.2 Soient g un graph et d son dictionnaire d'adjacencel'ordre d'un graphe correspond aux nombre de d'entrée dans le dictionnaire len(d)
@@ -243,6 +243,35 @@ def matdic(m):
         d[i] = l
     return d
 
-print(matdic(m2))
+#print(matdic(m2))
 
+#2
+"""
+0 1 0 1 0
+0 0 0 0 0
+0 1 0 1 0
+0 1 0 1 1
+1 0 1 0 0
+"""
+
+"""
+0 0 0 0 0 1
+1 0 0 1 0 1
+1 1 0 1 1 0
+0 0 0 0 0 0
+0 0 0 0 0 1
+0 1 0 0 0 0
+"""
+def dicmat(d):
+    l=[]
+    for i in d:
+        l2=[]
+        for j in range(len(d)):
+            if j in d[i]:
+                l2.append(1)
+            else:
+                l2.append(0)
+        l.append(l2)
+    return l
+print(dicmat(d))
 
