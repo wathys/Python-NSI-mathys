@@ -1,0 +1,76 @@
+#Exercice type bac
+#EX1
+
+class Attraction:
+    def __init__(self,nom,dureee):
+        self.nom = nom
+        self.duree = dureee
+        self.voisine = []
+
+a1 = Attraction("Grand huit", 11)
+a2 = Attraction("Pettis chevaux", 6)
+a3 = Attraction("Train fantôme", 9)
+a4 = Attraction("Grande roue", 10)
+a1.voisine = [(a2,7),(a3,5)]
+a2.voisine = [(a1,7),(a3,3),(a4,4)]
+a3.voisine = [(a1,5),(a3,3),(a4,4)]
+a4.voisine = [(a2,4),(a3,6)]
+
+#1
+a4.duree = 12
+
+#2
+# la valeur de a2.voisine[2][1] donne le temps pour aller a l'attraction 4 choisie en partant de l'attraction 2
+
+#3
+#l'attraction 3 a pour voisine la l'attraction 1 avec temps de trajet de 5 min, l'attraction 2 avec 3 min tdt et l'attraction 4 avec 6 tdt
+
+#5 elle est non orienté car les usagé peut parcourir le parc dans le sens qui veulent
+
+#6 11+7+6+3+9 = 36 le totale de la duree de l'attraction et le temps de trajet entre attraction
+
+#7 car le parcours et impossible a reproduire dans ce sens
+
+#8
+def sont_voisine(a,b):
+    for i in range(len(a.voisine)):
+        if a.voisine[i][0] == b:
+            return True
+    return False
+#9
+def est_balade(t):
+    for i in t:
+        if not sont_voisine(i):
+            return False
+    return True
+
+def trajet(tab):
+    s=0
+    for i in range(len(tab)+1):
+        s+=tab[1].duree
+        for j in tab[1].voisine:
+            if j[0] == tab[i+1]:
+                s += j[1]
+    s+=tab[len(tab)].duree
+    return s
+
+def parcours(attr, deja_vues, balade,nb):
+    if not attr.nom in deja_vues:
+        deja_vues[attr.nom] = True
+        if nb == 0 or sont_voisine(attr,balade[nb-1]):
+            balade[nb] = attr
+            nb = nb + 1
+        for voisine in attr.voisine:
+            nb = parcours(voisine[0],deja_vues,balade,nb)
+    return nb
+
+balade = [None for i in range(4)]
+print(parcours(a4,{},balade,0))
+
+#parcours en profondeur
+
+#11 a faire
+
+# 12 [a1,None,a3,None]
+
+
