@@ -46,9 +46,9 @@ class Dossier:
     def contient(self,nom_dossier):
         if self.nom == nom_dossier:
             return True
-        else : 
-            for f in self.fils:
-                return f.contient(nom_dossier)
+        for f in self.fils:
+            if f.contient(nom_dossier):
+                return True
         return False
 
 
@@ -117,9 +117,6 @@ def ordre_lex(mot1,mot2):
 #c 2**8
 
 #Partie B
-
-4#
-
-
-
-
+#3 A - > H - > D  message envoyé du réseau L1 vers le réseau L2.
+#4 A -> H - > C - > D message envoyé du réseau L1 vers le réseau L2
+#5 
