@@ -36,16 +36,19 @@ class Dossier:
         return self.fils == []
 
     def parcours(self):
-        print(self.fils)
-        for f in range(self.fils):
-            parcours()
+        print(self.nom)
+        for f in self.fils:
+            f.parcours()
 
     def mkdir(self,nom):
-        self.fils.append(nom)
+        self.fils.append(Dossier(nom,[]))
 
     def contient(self,nom_dossier):
-        if nom_dossier in self.fils:
+        if self.nom == nom_dossier:
             return True
+        else : 
+            for f in self.fils:
+                return f.contient(nom_dossier)
         return False
 
 
@@ -54,9 +57,15 @@ var_multimedia = Dossier("multimedia",["images","vidéo"])
 var_images = Dossier("images",[])
 var_videos = Dossier("video",["film"])
 var_films = Dossier("films",[])
+#9 car la condition d'arret est le for f in self.fils donc si fils est vide alors elle s'arrête
+#10 
+def parcours(self):
+        for f in self.fils:
+            f.parcours()
+            print(self.nom)
 
 #11 Pacours affiche tout les sous dossier a partir d'un dossier alors que UNIX ls affiche tout les fichiers et dossiers à partir d'un dossier.
-
+#15 rajouter une variable parent
 #Exercice 2 Partie A
     #1 Non car plusieur chanson peuvent avoir le même titre
     #2Wecome too the jungle Appetite for Destruction
@@ -102,7 +111,14 @@ def ordre_lex(mot1,mot2):
                 elif mot1[i]>mot2[i]:
                     return False
 
+#exercice 3
+#a 172.16
+#b 172.16.0.255
+#c 2**8
 
+#Partie B
+
+4#
 
 
 
