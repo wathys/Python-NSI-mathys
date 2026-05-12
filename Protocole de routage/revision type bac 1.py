@@ -2,8 +2,7 @@
 
 #Parti A
     #1 ls
-    #2 il remonte 2 fois dans l'arboresence puis le déplace a cette emplacement : /home/documents
-    #3
+    #2 il remonte 2 fois dans l'arboresence puis le déplace a cette emplacement : /home/document
 
 class Arbre:
     def __init__(self,nom,g,d):
@@ -20,11 +19,11 @@ class Arbre:
         if self.droit != None :
             self.droit.parcours()
 
-    #L'arbre est en binaire et peut donc contenir 2 sous dossier maximum tant dis que sur la figure 1 on peut voire plusieur sous dossier
+    #3 L'arbre est en binaire et peut donc contenir 2 sous dossier maximum tant dis que sur la figure 1 on peut voire plusieur sous dossier
 
-    #4 suffixe
+    #4 prefixe
 
-    #5 Cours / administratif / personnel / document / images / films / vidéo / multimédia / home
+    #5 
 
 #Partie B
 
@@ -52,7 +51,9 @@ class Dossier:
 
 var_home = Dossier("home",["document","multimedia"])
 var_multimedia = Dossier("multimedia",["images","vidéo"])
-
+var_images = Dossier("images",[])
+var_videos = Dossier("video",["film"])
+var_films = Dossier("films",[])
 
 #11 Pacours affiche tout les sous dossier a partir d'un dossier alors que UNIX ls affiche tout les fichiers et dossiers à partir d'un dossier.
 
